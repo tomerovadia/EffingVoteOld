@@ -8,6 +8,6 @@ app.get('/', function (req, res) {
 });
 
 // Set up server
-var server = app.listen(process.env.PORT || 8081, () => {
-   console.log("EffingVote listening at 8081");
+var server = app.listen(process.env.PORT || 8080, () => {
+   console.log("EffingVote listening at 8080");
 });
