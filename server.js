@@ -7,6 +7,11 @@ app.get('/', function (req, res) {
   res.sendFile( __dirname + "/" + "index.html" );
 });
 
+app.get('/blah', function (req, res) {
+  console.log('Serving the blah');
+  res.send("blahblah");
+});
+
 // Set up server
 var server = app.listen(process.env.PORT || 8080, () => {
    console.log("EffingVote listening at 8080");
