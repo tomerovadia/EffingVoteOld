@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import App from './App';
 
-const Root = () => (
-  <HashRouter>
-    <div>
-      <Route exact path="/" component={App} />
-    </div>
-  </HashRouter>
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <HashRouter>
+      <App store={store} />
+    </HashRouter>
+  </Provider>
 );
 
 export default Root;
