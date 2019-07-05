@@ -16,13 +16,8 @@ app.get('/blah', function (req, res) {
 });
 
 // Set up server
-<<<<<<< HEAD:server.js
 var server = app.listen(process.env.PORT || 8080, () => {
    console.log("EffingVote listening at 8080");
-});
-=======
-var server = app.listen(process.env.PORT || 8081, () => {
-   console.log("EffingVote listening at 8081");
 });
 
 var wsServer = new websocket.server({httpServer: server});
@@ -52,5 +47,3 @@ wsServer.on('request', function(request) {
   });
   console.log('request done');
 });
-
->>>>>>> 8cdbc55b5c210d87cd10f6f1daff510e88f8223c:app.js
