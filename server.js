@@ -43,7 +43,7 @@ wsServer.on('request', function(request) {
 
   connection.on('close', function(connection) {
     console.log('Closing connection to client #', index);
-    clientsList.split(index, 1)
+    clientsList.splice(index, 1)
   });
   console.log('request done');
 });
