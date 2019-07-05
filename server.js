@@ -5,10 +5,10 @@ const app = express();
 
 var clientsList = [];
 
-app.get('/', function (req, res) {
-  console.log('Serving index.html');
-  res.sendFile( __dirname + "/" + "index.html" );
-});
+// app.get('/', function (req, res) {
+//   console.log('Serving index.html');
+//   res.sendFile( __dirname + "/public/" + "index.html" );
+// });
 
 app.get('/blah', function (req, res) {
   console.log('Serving the blah');
