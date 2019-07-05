@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express');
 const websocket = require('websocket');
 const app = express();
+const path = require('path');
 
 var clientsList = [];
 
