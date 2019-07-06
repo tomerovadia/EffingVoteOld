@@ -27,12 +27,14 @@ export const fetchWSClient = () => {
   });
 }
 
-export const sendMessage = (client) => {
-    if (client.readyState === client.OPEN) {
-        var number = Math.round(Math.random() * 0xFFFFFF);
-        client.send(number.toString());
-    }
-}
+// export const sendMessage = (client) => {
+//   return new Promise((resolve, reject) => {
+//     if (client != null && client.readyState === client.OPEN) {
+//       var number = Math.round(Math.random() * 0xFFFFFF);
+//       client.send(number.toString());
+//     }
+//   }
+// }
  
 export const getBlah = (availability) => {
   return $.ajax({

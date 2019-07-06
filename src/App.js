@@ -12,6 +12,12 @@ class App extends React.Component {
     super(props);
     this.props.fetchBlah();
     this.props.fetchWSClient();
+    setTimeout(() => {
+      if (this.props.wsClient != null && this.props.wsClient.readyState === this.props.wsClient.OPEN) {
+        var number = Math.round(Math.random() * 0xFFFFFF);
+        this.props.wsClient.send(number.toString());
+      }
+    }, 5000);
   }
   
   render() {
