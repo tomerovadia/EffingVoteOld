@@ -27,7 +27,7 @@ var wsServer = new websocket.server({httpServer: server});
 
 wsServer.on('request', function(request) {
   var connection = request.accept('echo-protocol', request.origin);
-  var index = clientsList.push(connection) - 1
+  var index = clientsList.push(connection) - 1;
   console.log('Opened connection to client #', index);
 
   // This is the most important callback for us, we'll handle
@@ -39,14 +39,14 @@ wsServer.on('request', function(request) {
     for (var i=0; i < clientsList.length; i++) {
       if (i != index) {
         console.log('sending to client #', i);
-        clientsList[i].sendUTF(message['utf8Data'])
+        clientsList[i].sendUTF(message['utf8Data']);
       }
     }
   });
 
   connection.on('close', function(connection) {
     console.log('Closing connection to client #', index);
-    clientsList.splice(index, 1)
+    clientsList.splice(index, 1);
   });
   console.log('request done');
 });
