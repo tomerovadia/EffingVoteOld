@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
-import {fetchBlah, fetchWSClient} from './actions/actions';
+import { fetchBlah, fetchWSClient } from './actions/actions';
+import { RECEIVE_MESSAGE } from './actions/actions.js';
 // import $ from "jquery";
 
 class App extends React.Component {
@@ -32,6 +33,11 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.wsClient.send(this.state.message);
+    this.props.store.dispatch({
+      type: RECEIVE_MESSAGE,
+      message: this.state.message,
+    });
+    this.setState({message: ""});
   }
   
   render() {
@@ -68,7 +74,7 @@ const mapStateToProps = (state) => {
   return {
     blah: state.blah.blah,
     wsClient: state.blah.wsClient,
-    message: state.blah.message,
+    message: state.blah.messages,
   };
 };
 

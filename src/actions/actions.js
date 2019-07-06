@@ -22,6 +22,13 @@ export const receiveWSClient = (wsClient) => {
   };
 };
 
+// const receiveMessage = (message) => {
+//   return {
+//     type: RECEIVE_MESSAGE,
+//     message,
+//   };
+// };
+
 // Thunk function action creators
 
 export const fetchBlah = () => dispatch => {
@@ -39,3 +46,9 @@ export const fetchWSClient = () => dispatch => {
       // (errors) => dispatch(jQuery.parseJSON(errors.responseText))
     );
 };
+
+// export const addMessage = (message) => dispatch => {
+//   return new Promise((resolve, reject) => {
+//     resolve(dispatch(receiveMessage(message)));
+//   })
+// }

@@ -5,7 +5,7 @@ import { RECEIVE_BLAH, RECEIVE_WS_CLIENT, RECEIVE_MESSAGE } from '../actions/act
 const _initialState = {
   blah: "",
   wsClient: null,
-  message: "",
+  messages: [],
   errors: {},
 };
 
@@ -22,7 +22,8 @@ export default (oldState = _initialState, action) => {
       return newState;
 
     case RECEIVE_MESSAGE:
-      newState.message = action.message;
+      newState.messages.push(action.message);
+      console.log(newState)
       return newState;
 
     default:
