@@ -1,4 +1,6 @@
 import $ from "jquery";
+import { receiveMessage } from '../index';
+
 var W3CWebSocket = require('websocket').w3cwebsocket;
 
 export const fetchWSClient = () => {
@@ -18,11 +20,7 @@ export const fetchWSClient = () => {
         console.log('echo-protocol Client Closed');
     };
     
-    client.onmessage = function(e) {
-        if (typeof e.data === 'string') {
-            console.log("Received: '" + e.data + "'");
-        }
-    };
+    client.onmessage = receiveMessage;
     resolve(client);
   });
 }

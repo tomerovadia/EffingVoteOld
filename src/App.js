@@ -37,13 +37,9 @@ class App extends React.Component {
   render() {
     // console.log(this.props.wsClient);
     return <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Welcome to <code>EffingVote</code>.
-            {this.props.blah}
-          </p>
-        </header>React.Component 
+        <div>
+          {this.props.message}
+        </div>
         <form onSubmit={this.handleSubmit}>
           <input 
             type="text" 
@@ -58,6 +54,13 @@ class App extends React.Component {
           
         </form>
       </div>
+      // <header className="App-header">
+      // <img src={logo} className="App-logo" alt="logo" />
+      // <p>
+      // Welcome to <code>EffingVote</code>.
+      // {this.props.blah}
+      // </p>
+      // </header>React.Component 
   }
 }
 
@@ -65,6 +68,7 @@ const mapStateToProps = (state) => {
   return {
     blah: state.blah.blah,
     wsClient: state.blah.wsClient,
+    message: state.blah.message,
   };
 };
 

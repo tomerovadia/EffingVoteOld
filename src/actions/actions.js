@@ -4,6 +4,7 @@ import * as BlahAPIUtil from '../util/blah_api_util';
 
 export const RECEIVE_BLAH = 'RECEIVE_BLAH';
 export const RECEIVE_WS_CLIENT = 'RECEIVE_WS_CLIENT';
+export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
 // Regular object action creators
 
@@ -20,7 +21,6 @@ export const receiveWSClient = (wsClient) => {
     wsClient,
   };
 };
-
 
 // Thunk function action creators
 
