@@ -26,7 +26,7 @@ var server = app.listen(process.env.PORT || 8080, () => {
 var wsServer = new websocket.server({httpServer: server});
 
 wsServer.on('request', function(request) {
-  var connection = request.accept(null, request.origin);
+  var connection = request.accept('echo-protocol', request.origin);
   var index = clientsList.push(connection) - 1
   console.log('Opened connection to client #', index);
 
