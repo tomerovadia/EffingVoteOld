@@ -3,13 +3,16 @@ const express = require('express');
 const websocket = require('websocket');
 const redis = require('redis');
 const app = express();
+const path = require('path');
 
 var clientsList = [];
 
-app.get('/', function (req, res) {
-  console.log('Serving index.html');
-  res.sendFile( __dirname + "/" + "index.html" );
-});
+app.use(express.static(path.join(__dirname, 'build')));
+
+// app.get('/', function (req, res) {
+//   console.log('Serving index.html');
+//   res.sendFile( __dirname + "/public/" + "index.html" );
+// });
 
 app.get('/blah', function (req, res) {
   console.log('Serving the blah');
