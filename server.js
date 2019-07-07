@@ -30,8 +30,9 @@ wsServer.on('request', function(request) {
   var connection = request.accept(null, request.origin);
   var index = clientsList.push(connection) - 1;
   console.log('Opened connection to client #', index);
-  var redisSubClient = redis.createClient();
-  var redisPubClient = redis.createClient();
+	//var client = redis.createClient(process.env.REDISCLOUD_URL, {no_ready_check: true});
+  var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);
+  var redisPubClient = redis.createClient(process.env.REDISCLOUD_URL);
 
   redisSubClient.subscribe('channel');
   redisSubClient.on('message', function(channel, message) {
