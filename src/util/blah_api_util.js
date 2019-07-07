@@ -6,7 +6,7 @@ const io = require('socket.io-client');
 
 export const fetchWSClient = () => {
   return new Promise((resolve, reject) => {
-    const socket = io('http://localhost:8080');
+    const socket = io();
     socket.on('chat message', receiveMessage);
     
     // var client = new W3CWebSocket('ws://localhost:8080/', 'echo-protocol');
