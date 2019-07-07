@@ -32,7 +32,8 @@ class App extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    this.props.wsClient.send(this.state.message);
+    this.props.wsClient.emit('chat message', this.state.message);
+    // this.props.wsClient.send(this.state.message);
     this.props.store.dispatch({
       type: RECEIVE_MESSAGE,
       message: this.state.message,

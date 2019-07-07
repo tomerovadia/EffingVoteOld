@@ -8,13 +8,11 @@ import { RECEIVE_MESSAGE } from './actions/actions.js';
 
 const store = configureStore();
 
-export const receiveMessage = (e) => {
-  if (typeof e.data === 'string') {
-      console.log("Received: '" + e.data + "'");
-  }
+export const receiveMessage = (message) => {
+  console.log("Received: '" + message + "'");
   store.dispatch({
     type: RECEIVE_MESSAGE,
-    message: e.data,
+    message,
   });
 }
 
