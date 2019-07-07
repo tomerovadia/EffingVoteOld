@@ -5,7 +5,7 @@ var W3CWebSocket = require('websocket').w3cwebsocket;
 
 export const fetchWSClient = () => {
   return new Promise((resolve, reject) => {
-    var client = new W3CWebSocket('ws://localhost:8080/', 'echo-protocol');
+    var client = new W3CWebSocket('ws://effingvote.herokuapp.com:' + process.env.PORT, 'echo-protocol');
     
     client.onerror = function() {
         console.log('Connection Error');
