@@ -3,10 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Root from './Root';
 import * as serviceWorker from './serviceWorker';
-import configureStore from './store/store.js';
+import { configureStore } from './store/store.js';
+import { RECEIVE_MESSAGE } from './actions/actions.js';
+
+const store = configureStore();
+
+export const receiveMessage = (message) => {
+  console.log("Received: '" + message + "'");
+  store.dispatch({
+    type: RECEIVE_MESSAGE,
+    message,
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  const store = configureStore();
 
   ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
 
