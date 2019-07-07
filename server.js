@@ -4,65 +4,42 @@ const app = express();
 const http = require('http').createServer(app);;
 const path = require('path');
 var io = require('socket.io')(http);
+const redis = require('redis');
 
-var clientsList = [];
+var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);
+var redisPubClient = redis.createClient(process.env.REDISCLOUD_URL);
+redisSubClient.subscribe('mychannel');
 
+// Event listener for when this server receives a message from Reddis, 
+// sends to all browser clients
+redisSubClient.on('message', function(channel, message) {
+  io.sockets.emit('chat message', message);
+});
+
+// Serves the front-end
 app.use(express.static(path.join(__dirname, 'build')));
 
-// app.get('/', function (req, res) {
-//   console.log('Serving index.html');
-//   res.sendFile( __dirname + "/public/" + "index.html" );
-// });
-
-app.get('/blah', function (req, res) {
+app.get('/blah', function(req, res) {
   console.log('Serving the blah');
   res.send("blahblah");
 });
 
-// Set up server
-// var server = app.listen(process.env.PORT || 8080, () => {
-//   console.log("EffingVote listening at 8080");
-// });
-// 
-// var wsServer = new websocket.server({httpServer: server});
-
+// Event listener for when a browser client connects to this server
 io.on('connection', function(socket) {
   console.log('Socket.io user connected');
+  
+  // Event listener for when a browser client disconnects to this server
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
+  
+  // Event listener for when a browser client sends a message to this server
   socket.on('chat message', function(message){
     console.log('message: ' + message);
-    socket.broadcast.emit('chat message', message);
+    redisPubClient.publish('mychannel', message['utf8Data']);
   });
 });
 
 http.listen(process.env.PORT || 8080, function() {
   console.log('listening on *:8080');
 });
-
-// wsServer.on('request', function(request) {
-//   var connection = request.accept('echo-protocol', request.origin);
-//   var index = clientsList.push(connection) - 1;
-//   console.log('Opened connection to client #', index);
-// 
-//   // This is the most important callback for us, we'll handle
-//   // all messages from users here.
-//   connection.on('message', function(message) {
-//     if (message.type !== 'utf8') { return; }
-//     console.log('incoming message', message);
-// 
-//     for (var i=0; i < clientsList.length; i++) {
-//       if (i != index) {
-//         console.log('sending to client #', i);
-//         clientsList[i].sendUTF(message['utf8Data']);
-//       }
-//     }
-//   });
-// 
-//   connection.on('close', function(connection) {
-//     console.log('Closing connection to client #', index);
-//     clientsList.splice(index, 1);
-//   });
-//   console.log('request done');
-// });
