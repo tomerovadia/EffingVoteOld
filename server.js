@@ -36,7 +36,7 @@ io.on('connection', function(socket) {
   // Event listener for when a browser client sends a message to this server
   socket.on('chat message', function(message){
     console.log('message: ' + message);
-    redisPubClient.publish('mychannel', message['utf8Data']);
+    redisPubClient.publish('mychannel', message);
   });
 });
 
