@@ -20,7 +20,8 @@ app.get('/blah', function (req, res) {
 
 // Set up server
 var server = app.listen(process.env.PORT || 8080, () => {
-   console.log("EffingVote listening at 8080");
+  console.log(process.env.PORT);
+  console.log("EffingVote listening at 8080");
 });
 
 var wsServer = new websocket.server({httpServer: server});
