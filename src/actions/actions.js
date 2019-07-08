@@ -3,7 +3,7 @@ import * as BlahAPIUtil from '../util/blah_api_util';
 // Constants
 
 export const RECEIVE_BLAH = 'RECEIVE_BLAH';
-export const RECEIVE_WS_CLIENT = 'RECEIVE_WS_CLIENT';
+export const RECEIVE_SOCKET_CLIENT = 'RECEIVE_SOCKET_CLIENT';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
 // Regular object action creators
@@ -15,19 +15,12 @@ export const receiveBlah = (blah) => {
   };
 };
 
-export const receiveWSClient = (wsClient) => {
+export const receiveSocketClient = (socketClient) => {
   return {
-    type: RECEIVE_WS_CLIENT,
-    wsClient,
+    type: RECEIVE_SOCKET_CLIENT,
+    socketClient,
   };
 };
-
-// const receiveMessage = (message) => {
-//   return {
-//     type: RECEIVE_MESSAGE,
-//     message,
-//   };
-// };
 
 // Thunk function action creators
 
@@ -39,16 +32,10 @@ export const fetchBlah = () => dispatch => {
     );
 };
 
-export const fetchWSClient = () => dispatch => {
-  return BlahAPIUtil.fetchWSClient()
+export const fetchSocketClient = () => dispatch => {
+  return BlahAPIUtil.fetchSocketClient()
     .then(
-      (wsClient) => dispatch(receiveWSClient(wsClient))
+      (socketClient) => dispatch(receiveSocketClient(socketClient))
       // (errors) => dispatch(jQuery.parseJSON(errors.responseText))
     );
 };
-
-// export const addMessage = (message) => dispatch => {
-//   return new Promise((resolve, reject) => {
-//     resolve(dispatch(receiveMessage(message)));
-//   })
-// }

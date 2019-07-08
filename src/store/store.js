@@ -4,5 +4,4 @@ import thunk from 'redux-thunk';
 
 export const configureStore = (preloadedState = {}) => {
   return createStore(rootReducer, preloadedState, applyMiddleware(thunk));
-  // return createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger));
 };
