@@ -1,10 +1,10 @@
 
 import merge from 'lodash/merge';
-import { RECEIVE_BLAH, RECEIVE_WS_CLIENT, RECEIVE_MESSAGE } from '../actions/actions.js';
+import { RECEIVE_BLAH, RECEIVE_SOCKET_CLIENT, RECEIVE_MESSAGE } from '../actions/actions.js';
 
 const _initialState = {
   blah: "",
-  wsClient: null,
+  socketClient: null,
   messages: [],
   errors: {},
 };
@@ -17,8 +17,8 @@ export default (oldState = _initialState, action) => {
       newState.blah = action.blah;
       return newState;
 
-    case RECEIVE_WS_CLIENT:
-      newState.wsClient = action.wsClient;
+    case RECEIVE_SOCKET_CLIENT:
+      newState.socketClient = action.socketClient;
       return newState;
 
     case RECEIVE_MESSAGE:

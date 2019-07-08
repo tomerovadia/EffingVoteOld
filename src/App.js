@@ -3,25 +3,19 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
-import { fetchBlah, fetchWSClient } from './actions/actions';
+import { fetchBlah, fetchSocketClient } from './actions/actions';
 import { RECEIVE_MESSAGE } from './actions/actions.js';
-// import $ from "jquery";
 
 class App extends React.Component {
-  
   constructor(props) {
     super(props);
+    
     this.state = {
       message: "",
     };
+    
     this.props.fetchBlah();
-    this.props.fetchWSClient();
-    // setTimeout(() => {
-    //   if (this.props.wsClient != null && this.props.wsClient.readyState === this.props.wsClient.OPEN) {
-    //     var number = Math.round(Math.random() * 0xFFFFFF);
-    //     this.props.wsClient.send(number.toString());
-    //   }
-    // }, 5000);
+    this.props.fetchSocketClient();
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -32,8 +26,7 @@ class App extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    this.props.wsClient.emit('chat message', this.state.message);
-    // this.props.wsClient.send(this.state.message);
+    this.props.socketClient.emit('chat message', this.state.message);
     this.props.store.dispatch({
       type: RECEIVE_MESSAGE,
       message: this.state.message,
@@ -42,10 +35,9 @@ class App extends React.Component {
   }
   
   render() {
-    // console.log(this.props.wsClient);
     return <div className="App">
         <div>
-          {this.props.message}
+          {this.props.messages}
         </div>
         <form onSubmit={this.handleSubmit}>
           <input 
@@ -58,7 +50,6 @@ class App extends React.Component {
           <button>
             Submit
           </button>
-          
         </form>
       </div>
       // <header className="App-header">
@@ -73,16 +64,16 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    blah: state.blah.blah,
-    wsClient: state.blah.wsClient,
-    message: state.blah.messages,
+    chat: state.chat.blah,
+    socketClient: state.chat.socketClient,
+    messages: state.chat.messages,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchBlah: () => dispatch(fetchBlah()),
-    fetchWSClient: () => dispatch(fetchWSClient()),
+    fetchSocketClient: () => dispatch(fetchSocketClient()),
   };
 }
 
