@@ -41,7 +41,7 @@ class App extends React.Component {
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="input-div">
-            <input 
+            <textarea 
             className="main-chat-input"
             type="text" 
             placeholder="How do I effin' vote?" 
