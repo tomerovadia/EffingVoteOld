@@ -35,21 +35,25 @@ class App extends React.Component {
   }
   
   render() {
-    return <div className="App">
-        <div>
+    return <div className="main-chat">
+        <div className="message-history">
           {this.props.messages}
         </div>
         <form onSubmit={this.handleSubmit}>
-          <input 
+          <div className="input-div">
+            <input 
+            className="main-chat-input"
             type="text" 
-            placeholder="placeholder" 
+            placeholder="How do I effin' vote?" 
             value={this.state.message}
             onChange={this.handleMessageChange}
-          />
-          
-          <button>
-            Submit
-          </button>
+            />
+          </div>
+          <div className="button-div">
+            <button>
+              Send
+            </button>
+          </div>
         </form>
       </div>
       // <header className="App-header">
