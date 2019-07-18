@@ -17,7 +17,14 @@ class App extends React.Component {
     this.props.fetchBlah();
     this.props.fetchSocketClient();
     this.handleMessageChange = this.handleMessageChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  
+  handleKeyPress(e) {
+    if(e.keyCode === 13 && !e.shiftKey) {
+      this.handleSubmit(e);
+    }
   }
   
   handleMessageChange(e) {
@@ -35,21 +42,25 @@ class App extends React.Component {
   }
   
   render() {
-    return <div className="App">
-        <div>
+    return <div className="main-chat">
+        <div className="message-history">
           {this.props.messages}
         </div>
         <form onSubmit={this.handleSubmit}>
-          <input 
-            type="text" 
-            placeholder="placeholder" 
-            value={this.state.message}
-            onChange={this.handleMessageChange}
-          />
-          
-          <button>
-            Submit
-          </button>
+          <div className="input-div">
+            <textarea 
+              className="main-chat-input"
+              placeholder="How do I effin' vote?" 
+              value={this.state.message}
+              onChange={this.handleMessageChange}
+              onKeyDown={this.handleKeyPress}
+            />
+          </div>
+          <div className="button-div">
+            <button>
+              Send
+            </button>
+          </div>
         </form>
       </div>
       // <header className="App-header">
