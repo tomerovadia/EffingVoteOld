@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import { fetchBlah, fetchSocketClient } from './actions/actions';
 import { RECEIVE_MESSAGE } from './actions/actions.js';
+import Message from './message';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,9 +43,13 @@ class App extends React.Component {
   }
   
   render() {
+    this.content = this.props.messages.map((message, i) => {
+      return <Message key={i} message={message} />
+    });
+    
     return <div className="main-chat">
         <div className="message-history">
-          {this.props.messages}
+          {this.content}
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="input-div">

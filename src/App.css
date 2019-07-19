@@ -115,6 +115,13 @@ time, mark, audio, video {
   border-radius: 3px;
 }
 
+.message-container {
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+  margin: 2px 0;
+}
+
 /* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
