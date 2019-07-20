@@ -3,16 +3,19 @@ import './messages.css';
 import { RECEIVE_MESSAGE, MessageTypeEnum } from './actions/actions.js';
 
 export default (props) => {
-  var messageTypeClassName;
+  var messageBubbleTypeClassName;
+  var messageContainerTypeClassName;
   if(props.messageType === MessageTypeEnum.SENT) {
-    messageTypeClassName = "sent-message-bubble";
+    messageBubbleTypeClassName = "sent-message-bubble";
+    messageContainerTypeClassName = "sent-message-container";
   } else if (props.messageType === MessageTypeEnum.RECEIVED) {
-    messageTypeClassName = "received-message-bubble";
+    messageBubbleTypeClassName = "received-message-bubble";
+    messageContainerTypeClassName = "received-message-container";
   }
 
   return (
-    <div className='message-container'>
-      <div className={`message-bubble ${messageTypeClassName}`}>
+    <div className={`message-container ${messageContainerTypeClassName}`}>
+      <div className={`message-bubble ${messageBubbleTypeClassName}`}>
         <p>{props.message}</p>
       </div>
     </div>

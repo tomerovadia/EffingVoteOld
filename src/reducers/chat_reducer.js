@@ -1,11 +1,16 @@
 
 import merge from 'lodash/merge';
-import { RECEIVE_BLAH, RECEIVE_SOCKET_CLIENT, RECEIVE_MESSAGE } from '../actions/actions.js';
+import { RECEIVE_BLAH, RECEIVE_SOCKET_CLIENT, RECEIVE_MESSAGE, MessageTypeEnum } from '../actions/actions.js';
 
 const _initialState = {
   blah: "",
   socketClient: null,
-  messages: [],
+  messages: [
+    {
+      message: "How do I effin' vote?",
+      messageType: MessageTypeEnum.SENT,
+    }
+  ],
   errors: {},
 };
 
