@@ -58,9 +58,9 @@ time, mark, audio, video {
 } */
 
 .message-history {
-  background-color: yellow;
   width: 100%;
   height: 90%;
+  background-color: lightgrey;
 }
 
 .main-chat .input-div {

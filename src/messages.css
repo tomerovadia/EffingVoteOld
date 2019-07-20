@@ -1,0 +1,15 @@
+.message-container {
+  width: 100%;
+}
+
+.message-bubble {
+  background-color: blue;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px 15px;
+  padding: 10px;
+  border: 1px solid black;
+  color: white;
+  font-weight: 550;
+  font-family: sans-serif;
+}
