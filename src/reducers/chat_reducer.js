@@ -9,6 +9,10 @@ const _initialState = {
     {
       message: "How do I effin' vote?",
       messageType: MessageTypeEnum.SENT,
+    },
+    {
+      message: "I'd love to help! What state are you in?",
+      messageType: MessageTypeEnum.RECEIVED,
     }
   ],
   errors: {},
