@@ -1,11 +1,20 @@
 
 import merge from 'lodash/merge';
-import { RECEIVE_BLAH, RECEIVE_SOCKET_CLIENT, RECEIVE_MESSAGE } from '../actions/actions.js';
+import { RECEIVE_BLAH, RECEIVE_SOCKET_CLIENT, RECEIVE_MESSAGE, MessageTypeEnum } from '../actions/actions.js';
 
 const _initialState = {
   blah: "",
   socketClient: null,
-  messages: [],
+  messages: [
+    {
+      message: "How do I effin' vote?",
+      messageType: MessageTypeEnum.SENT,
+    },
+    {
+      message: "I'd love to help! What state are you in?",
+      messageType: MessageTypeEnum.RECEIVED,
+    }
+  ],
   errors: {},
 };
 
@@ -22,7 +31,10 @@ export default (oldState = _initialState, action) => {
       return newState;
 
     case RECEIVE_MESSAGE:
-      newState.messages.push(action.message);
+      newState.messages.push({
+        message: action.message,
+        messageType: action.messageType,
+      });
       return newState;
 
     default:

@@ -1,9 +1,17 @@
 .message-container {
   width: 100%;
+  display: flex;
+}
+
+.received-message-container {
+  justify-content: flex-start;
+}
+
+.sent-message-container {
+  justify-content: flex-end;
 }
 
 .message-bubble {
-  background-color: blue;
   text-align: center;
   border-radius: 5px;
   margin: 10px 15px;
@@ -12,4 +20,13 @@
   color: white;
   font-weight: 550;
   font-family: sans-serif;
+  width: 70%;
+}
+
+.received-message-bubble {
+  background-color: red;
+}
+
+.sent-message-bubble {
+  background-color: blue;
 }
