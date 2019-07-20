@@ -5,6 +5,8 @@ import * as BlahAPIUtil from '../util/blah_api_util';
 export const RECEIVE_BLAH = 'RECEIVE_BLAH';
 export const RECEIVE_SOCKET_CLIENT = 'RECEIVE_SOCKET_CLIENT';
 export const RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
+export const MessageTypeEnum = Object.freeze({"SENT":0, "RECEIVED":1,});
+
 
 // Regular object action creators
 

@@ -13,3 +13,11 @@
   font-weight: 550;
   font-family: sans-serif;
 }
+
+.received-message-bubble {
+  background-color: green;
+}
+
+.sent-message-bubble {
+  background-color: orange;
+}

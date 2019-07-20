@@ -22,7 +22,10 @@ export default (oldState = _initialState, action) => {
       return newState;
 
     case RECEIVE_MESSAGE:
-      newState.messages.push(action.message);
+      newState.messages.push({
+        message: action.message,
+        messageType: action.messageType,
+      });
       return newState;
 
     default:

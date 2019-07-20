@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
 import { fetchBlah, fetchSocketClient } from './actions/actions';
-import { RECEIVE_MESSAGE } from './actions/actions.js';
+import { RECEIVE_MESSAGE, MessageTypeEnum } from './actions/actions.js';
 import Message from './message';
 
 class App extends React.Component {
@@ -38,13 +38,17 @@ class App extends React.Component {
     this.props.store.dispatch({
       type: RECEIVE_MESSAGE,
       message: this.state.message,
+      messageType: MessageTypeEnum.SENT,
     });
     this.setState({message: ""});
   }
   
   render() {
     this.content = this.props.messages.map((message, i) => {
-      return <Message key={i} message={message} />
+      return <Message key={i} 
+        message={message.message} 
+        messageType={message.messageType} 
+      />
     });
     
     return <div className="main-chat">
