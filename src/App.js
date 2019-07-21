@@ -20,6 +20,7 @@ class App extends React.Component {
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.scrollToBottom = this.scrollToBottom.bind(this);
   }
   
   handleKeyPress(e) {
@@ -43,8 +44,16 @@ class App extends React.Component {
     this.setState({message: ""});
   }
   
+  scrollToBottom() {
+    this.endOfMessagesAnchor.scrollIntoView({ behavior: "smooth" });
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+  
   render() {
-    this.content = this.props.messages.map((message, i) => {
+    this.messageComponents = this.props.messages.map((message, i) => {
       return <Message key={i} 
         message={message.message} 
         messageType={message.messageType} 
@@ -52,8 +61,12 @@ class App extends React.Component {
     });
     
     return <div className="main-chat">
-        <div className="message-history">
-          {this.content}
+        <div className="message-history-container">
+          <div className="messages-container">
+            {this.messageComponents}
+            <div ref={(el) => { this.endOfMessagesAnchor = el; }}>
+            </div>
+          </div>
         </div>
         <form onSubmit={this.handleSubmit}>
           <div className="input-div">

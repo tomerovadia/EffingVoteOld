@@ -57,10 +57,19 @@ time, mark, audio, video {
   color: #61dafb;
 } */
 
-.message-history {
+.message-history-container {
   width: 100%;
   height: 90%;
   background-color: lightgrey;
+  display: flex;
+  align-items: flex-end;
+}
+
+.messages-container {
+  background-color: lightgrey;
+  width: 100%;
+  overflow: scroll;
+  max-height: 100%;
 }
 
 .main-chat .input-div {
