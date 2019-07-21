@@ -71,6 +71,7 @@ class App extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="input-div">
             <textarea 
+              autoFocus
               className="main-chat-input"
               placeholder="How do I effin' vote?" 
               value={this.state.message}
