@@ -72,7 +72,6 @@ class App extends React.Component {
           <div className="input-div">
             <textarea 
               autoFocus
-              className="main-chat-input"
               placeholder="How do I effin' vote?" 
               value={this.state.message}
               onChange={this.handleMessageChange}
@@ -81,7 +80,7 @@ class App extends React.Component {
           </div>
           <div className="button-div">
             <button>
-              Send
+            Send
             </button>
           </div>
         </form>

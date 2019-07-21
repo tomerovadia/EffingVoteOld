@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import autosize from 'autosize';
 import './index.css';
 import Root from './Root';
 import * as serviceWorker from './serviceWorker';
@@ -25,4 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // unregister() to register() below. Note this comes with some pitfalls.
   // Learn more about service workers: https://bit.ly/CRA-PWA
   serviceWorker.unregister();
+  
+  autosize(document.querySelectorAll('textarea'));
 });
