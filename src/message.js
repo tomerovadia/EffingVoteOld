@@ -1,6 +1,6 @@
 import React from 'react';
 import './messages.css';
-import { RECEIVE_MESSAGE, MessageTypeEnum } from './actions/actions.js';
+import { MessageTypeEnum } from './actions/actions.js';
 
 export default (props) => {
   var messageBubbleTypeClassName;

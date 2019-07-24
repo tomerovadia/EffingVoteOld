@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "autosize": "^4.0.2",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "lodash.merge": "^4.6.1",
