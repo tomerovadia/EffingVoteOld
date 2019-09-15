@@ -35,7 +35,7 @@ class App extends React.Component {
   
   handleSubmit(e) {
     e.preventDefault();
-    this.props.socketClient.emit('chat message', this.state.message);
+    this.props.socketClient.emit('message', this.state.message);
     this.props.store.dispatch({
       type: RECEIVE_MESSAGE,
       message: this.state.message,

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bluebird": "^3.5.5",
     "autosize": "^4.0.2",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
