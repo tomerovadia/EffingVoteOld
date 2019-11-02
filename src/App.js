@@ -70,11 +70,10 @@ class App extends React.Component {
       socketClientId = this.props.socketClient.id
     }
     
-    return <div className="wholepage-div">
-        <div className="id-label">
-          {this.state.socketClientId}
-        </div>
-        <div className="main-chat">
+    return <div className="main-chat">
+          <div className="id-label">
+            {this.state.socketClientId}
+          </div>
           <div className="message-history-container">
             <div className="messages-container">
               {this.messageComponents}
@@ -99,7 +98,6 @@ class App extends React.Component {
             </div>
           </form>
         </div>
-      </div>
       // <header className="App-header">
       // <img src={logo} className="App-logo" alt="logo" />
       // <p>
