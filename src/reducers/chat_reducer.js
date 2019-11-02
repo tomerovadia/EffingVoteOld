@@ -5,6 +5,7 @@ import { RECEIVE_BLAH, RECEIVE_SOCKET_CLIENT, RECEIVE_MESSAGE, MessageTypeEnum }
 const _initialState = {
   blah: "",
   socketClient: null,
+  socketClientId: null,
   messages: [
     {
       message: "How do I effin' vote?",

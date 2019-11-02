@@ -14,15 +14,15 @@ const waitingRoomKey = 'waitingroom';
 bluebird.promisifyAll(redis);
 var redisClient = redis.createClient(process.env.REDISCLOUD_URL);
 
-var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);
-var redisPubClient = redis.createClient(process.env.REDISCLOUD_URL);
-redisSubClient.subscribe('mychannel');
+// var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);
+// var redisPubClient = redis.createClient(process.env.REDISCLOUD_URL);
+// redisSubClient.subscribe('mychannel');
 
 // Event listener for when this server receives a message from Redis, 
 // sends to all browser clients
-redisSubClient.on('message', function(channel, message) {
-  io.sockets.emit('message', message);
-});
+// redisSubClient.on('message', function(channel, message) {
+//   io.sockets.emit('message', message);
+// });
 
 // Serves the front-end
 app.use(express.static(path.join(__dirname, 'build')));
@@ -40,7 +40,7 @@ io.on('connection', async function(socket) {
   const userID = 'user-' + socket.id;	
   console.log(userID, 'Socket.io user connected.');	
 
-   var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);	
+  var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);	
   var chatChannel;	
   // Loop until we find a chat partner or the waiting room is empty.	
   // TODO: Switch to a finite loop that sends failure info to the FE.	
@@ -75,13 +75,18 @@ io.on('connection', async function(socket) {
     console.log(userID, 'Subscribing to own channel:', chatChannel);	
   } else {	
     redisSubClient.subscribe(chatChannel);	
-    console.log(userID, 'Subscribing to channel:', chatChannel);	
+    // redisClient.publish(chatChannel, socket.id + ' has joined.');
+    console.log(userID, 'Subscribing to channel: ', chatChannel);	
   }	
 
    // Set up incoming message event handler.	
   redisSubClient.on('message', function(channel, message) {	
     console.log(userID, 'incoming message from redis', message);	
     socket.send(message);	
+  });
+  
+  redisSubClient.on('subscribe', function(channel, count) {	
+    console.log('subscribe event ', count);
   });
   
   // Event listener for when a browser client disconnects to this server
