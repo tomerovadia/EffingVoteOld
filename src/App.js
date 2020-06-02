@@ -72,7 +72,7 @@ class App extends React.Component {
     
     return <div className="main-chat">
           <div className="id-label">
-            {this.state.socketClientId}
+            {"Connected as " + this.state.socketClientId}
           </div>
           <div className="message-history-container">
             <div className="messages-container">

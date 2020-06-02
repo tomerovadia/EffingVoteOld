@@ -6,11 +6,11 @@ export const fetchSocketClient = () => {
   console.log("fetchSocketClient");
   return new Promise((resolve, reject) => {
     console.log("fetchSocketClient Promise");
-    const socket = io('http://192.168.0.109:8080');
-    
+    const socket = io();
+
     socket.on('message', receiveMessage);
     socket.on('connect', () => console.log('Your id is: ' + socket.id));
-    
+
     resolve(socket);
   });
 }
