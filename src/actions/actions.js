@@ -18,6 +18,7 @@ export const receiveBlah = (blah) => {
 };
 
 export const receiveSocketClient = (socketClient) => {
+  console.log("receiveSocketClient action");
   return {
     type: RECEIVE_SOCKET_CLIENT,
     socketClient,
@@ -37,7 +38,10 @@ export const fetchBlah = () => dispatch => {
 export const fetchSocketClient = () => dispatch => {
   return BlahAPIUtil.fetchSocketClient()
     .then(
-      (socketClient) => dispatch(receiveSocketClient(socketClient))
+      (socketClient) => {
+        console.log("fetchSocketClient action");
+        dispatch(receiveSocketClient(socketClient))
+      }
       // (errors) => dispatch(jQuery.parseJSON(errors.responseText))
     );
 };

@@ -20,13 +20,14 @@ redisSubClient.subscribe('mychannel');
 
 // Event listener for when this server receives a message from Redis, 
 // sends to all browser clients
-redisSubClient.on('message', function(channel, message) {
-  io.sockets.emit('message', message);
-});
+// redisSubClient.on('message', function(channel, message) {
+//   io.sockets.emit('message', message);
+// });
 
 // Serves the front-end
 app.use(express.static(path.join(__dirname, 'build')));
 
+// Example API endpoint
 app.get('/blah', function(req, res) {
   console.log('Serving the blah');
   res.send("blahblah");
@@ -35,48 +36,46 @@ app.get('/blah', function(req, res) {
 // Event listener for when a browser client connects to this server
 // Use an `async` function, so we can use `await` below.
 io.on('connection', async function(socket) {
+  console.log("server on connection");
   // TODO: Get a client ID from the browser, so we can be resilient to broken	
   // FE / BE connections. For now we'll use the socket ID.	
-  const userID = 'user-' + socket.id;	
-  console.log(userID, 'Socket.io user connected.');	
+  const userID = 'user-' + socket.id;
+  console.log(userID, 'Socket.io user connected.');
 
-   var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);	
-  var chatChannel;	
+  var redisSubClient = redis.createClient(process.env.REDISCLOUD_URL);
   // Loop until we find a chat partner or the waiting room is empty.	
   // TODO: Switch to a finite loop that sends failure info to the FE.	
-  while (true) {	
-    chatChannel = await redisClient.spopAsync(waitingRoomKey);	
-    if (chatChannel == null) {	
-      console.log(userID, 'No channels in waiting room.');	
-      break;	
-    }	
+  
+  var chatChannel = await redisClient.spopAsync(waitingRoomKey);
+  // Check if the acquired channel is still active.	
+  var numsub = await redisClient.pubsubAsync('NUMSUB', chatChannel);
+  console.log(userID, 'numsub:', numsub);	
+  numsub = numsub[1];
+  while(chatChannel != null && numsub != 1) {
+    chatChannel = await redisClient.spopAsync(waitingRoomKey);
     // Check if the acquired channel is still active.	
-    var numsub = await redisClient.pubsubAsync('NUMSUB', chatChannel);	
+    numsub = await redisClient.pubsubAsync('NUMSUB', chatChannel);
     console.log(userID, 'numsub:', numsub);	
-    numsub = numsub[1];	
+    numsub = numsub[1];
     if (numsub == 0) {	
       console.log(userID, 'Dropping channel:', chatChannel, numsub);	
-    } else if (numsub == 1) {	
-      console.log(userID, 'Selecting channel:', chatChannel, numsub);	
-      break;	
     } else {	
-      console.log(	
-          'WARNING: Too many subscribers in waiting-room channel: ', numsub);	
+      console.log('WARNING: Too many subscribers in waiting-room channel: ', numsub);	
       exit();	
     }	
-  }  // End while.	
-
-   // If we didn't find a partner channel, put own channel in waiting room.	
-  // Else subscribe to that channel.	
-  if (chatChannel == null) {	
+  }
+  
+  if (chatChannel == null) {
+    console.log(userID, 'No channels in waiting room.');
+    // Subscribe to own channel.	
     chatChannel = userID;	
     redisSubClient.subscribe(chatChannel);	
     await redisClient.saddAsync(waitingRoomKey, chatChannel);	
     console.log(userID, 'Subscribing to own channel:', chatChannel);	
-  } else {	
+  } else {
+    console.log(userID, 'Selecting channel:', chatChannel, numsub);	
     redisSubClient.subscribe(chatChannel);	
-    console.log(userID, 'Subscribing to channel:', chatChannel);	
-  }	
+  }
 
    // Set up incoming message event handler.	
   redisSubClient.on('message', function(channel, message) {	

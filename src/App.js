@@ -16,6 +16,7 @@ class App extends React.Component {
     };
     
     this.props.fetchBlah();
+    console.log("App.js constructor");
     this.props.fetchSocketClient();
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
