@@ -13,10 +13,15 @@ class App extends React.Component {
     
     this.state = {
       message: "",
+      socketClientId: "",
     };
     
     this.props.fetchBlah();
-    this.props.fetchSocketClient();
+    this.props.fetchSocketClient().then(() => {
+      this.props.socketClient.on('connect', () => {
+        this.setState({socketClientId: this.props.socketClient.id});
+      });
+    })
     this.handleMessageChange = this.handleMessageChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,31 +65,39 @@ class App extends React.Component {
       />
     });
     
+    var socketClientId;
+    if (this.props.socketClient) {
+      socketClientId = this.props.socketClient.id
+    }
+    
     return <div className="main-chat">
-        <div className="message-history-container">
-          <div className="messages-container">
-            {this.messageComponents}
-            <div ref={(el) => { this.endOfMessagesAnchor = el; }}>
+          <div className="id-label">
+            {"Connected as " + this.state.socketClientId}
+          </div>
+          <div className="message-history-container">
+            <div className="messages-container">
+              {this.messageComponents}
+              <div ref={(el) => { this.endOfMessagesAnchor = el; }}>
+              </div>
             </div>
           </div>
+          <form onSubmit={this.handleSubmit}>
+            <div className="input-div">
+              <textarea 
+                autoFocus
+                placeholder="How do I effin' vote?" 
+                value={this.state.message}
+                onChange={this.handleMessageChange}
+                onKeyDown={this.handleKeyPress}
+              />
+            </div>
+            <div className="button-div">
+              <button>
+              Send
+              </button>
+            </div>
+          </form>
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <div className="input-div">
-            <textarea 
-              autoFocus
-              placeholder="How do I effin' vote?" 
-              value={this.state.message}
-              onChange={this.handleMessageChange}
-              onKeyDown={this.handleKeyPress}
-            />
-          </div>
-          <div className="button-div">
-            <button>
-            Send
-            </button>
-          </div>
-        </form>
-      </div>
       // <header className="App-header">
       // <img src={logo} className="App-logo" alt="logo" />
       // <p>
